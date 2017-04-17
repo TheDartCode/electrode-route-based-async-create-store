@@ -4,8 +4,9 @@
 
 import ReduxRouterEngine from 'electrode-redux-router-engine';
 import {routes} from '../../client/routes';
-import {createStore} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
 import rootReducer from '../../client/reducers';
+import thunkMiddleware from 'redux-thunk';
 
 const Promise = require('bluebird');
 
@@ -15,7 +16,7 @@ function createReduxStore(req, match) { // eslint-disable-line
     number: {value: 999}
   };
 
-  const store = createStore(rootReducer, initialState);
+  const store = createStore(rootReducer, initialState, applyMiddleware(thunkMiddleware));
   return Promise.resolve(store);
 }
 

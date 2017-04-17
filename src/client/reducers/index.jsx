@@ -35,8 +35,13 @@ const asyncData = (store, action) => {
   }
 };
 
+const staticData = (store) => {
+  return store || '';
+};
+
 export default combineReducers({
   checkBox,
   number,
-  asyncData
+  asyncData,
+  staticData
 });

@@ -27,6 +27,9 @@ class Home extends React.Component {
           <li><Link to="/async">Go To Async Data Page!</Link></li>
           <li><Link to="/async/foo">Go To Async Data Page! (with param: foo)</Link></li>
         </ul>
+        <ul>
+          <li><Link to="/static">Go To Static Data Page!</Link></li>
+        </ul>
       </div>
     );
   }

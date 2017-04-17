@@ -13,7 +13,8 @@ const Promise = require('bluebird');
 function createReduxStore(req, match) { // eslint-disable-line
   const initialState = {
     checkBox: {checked: false},
-    number: {value: 999}
+    number: {value: 999},
+    staticData: 'Some non-async data here'
   };
 
   const store = createStore(rootReducer, initialState, applyMiddleware(thunkMiddleware));

@@ -7,7 +7,7 @@ const checkBox = (store, action) => {
     };
   }
 
-  return store || {checked: false};
+  return store || {};
 };
 
 const number = (store, action) => {
@@ -21,7 +21,7 @@ const number = (store, action) => {
     };
   }
 
-  return store || {value: 0};
+  return store || {};
 };
 
 const asyncData = (store, action) => {

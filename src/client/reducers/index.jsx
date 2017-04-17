@@ -24,7 +24,19 @@ const number = (store, action) => {
   return store || {value: 0};
 };
 
+const asyncData = (store, action) => {
+  switch (action.type) {
+    case 'REQUEST_DATA':
+      return {data: '<requesting>', option: action.data};
+    case 'RECEIVE_DATA':
+      return action.data;
+    default:
+      return store || {data: '', option: ''};
+  }
+};
+
 export default combineReducers({
   checkBox,
-  number
+  number,
+  asyncData
 });

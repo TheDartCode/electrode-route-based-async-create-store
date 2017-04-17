@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
-/**/
+import {Link} from 'react-router';
+
 import {toggleCheck, incNumber, decNumber} from '../actions';
 
 class Home extends React.Component {
@@ -9,7 +10,6 @@ class Home extends React.Component {
     const {checked, value} = props;
     return (
       <div>
-        {/**/}
         <h1>Hello <a href={'https://github.com/electrode-io'}>{'Electrode'}</a></h1>
         <div>
           <h2>Managing States with Redux</h2>
@@ -23,6 +23,10 @@ class Home extends React.Component {
             <button type={'button'} onClick={props.onIncrease}>+</button>
           </div>
         </div>
+        <ul>
+          <li><Link to="/async">Go To Async Data Page!</Link></li>
+          <li><Link to="/async/foo">Go To Async Data Page! (with param: foo)</Link></li>
+        </ul>
       </div>
     );
   }

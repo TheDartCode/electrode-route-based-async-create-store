@@ -52,6 +52,7 @@
     "electrode-redux-router-engine": "^1.2.2",
     "electrode-server": "^1.0.0",
     "electrode-static-paths": "^1.0.0",
+    "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.10.1",
     "redux-thunk": "^2.2.0"
   },

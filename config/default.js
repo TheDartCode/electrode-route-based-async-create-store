@@ -13,6 +13,9 @@ module.exports = {
     'inert': {
       'enable': true
     },
+    'custom-data': {
+      'module': './src/server/plugins/custom-data'
+    },
     'electrodeStaticPaths': {
       'enable': true,
       'options': {

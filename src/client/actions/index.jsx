@@ -1,4 +1,5 @@
 import {delay} from 'lodash';
+import fetch from 'isomorphic-fetch';
 
 export const toggleCheck = () => {
   return {
@@ -33,16 +34,14 @@ const requestData = (option) => {
 };
 
 const fetchData = () => {
-  const promise = new Promise((resolve) => {
-    delay(resolve, 2500, 'Async Data has been fetched! Yay!');
-  });
-  return promise;
+  return fetch('/custom-data');
 };
 
 export const getData = (params) => {
   return (dispatch) => {
     dispatch(requestData(params.option));
     return fetchData()
+      .then(respBody => respBody.json())
       .then((data) => {
         dispatch(receiveData({data, option: params.option}));
       });

@@ -9,16 +9,36 @@ import rootReducer from '../../client/reducers';
 import thunkMiddleware from 'redux-thunk';
 
 const Promise = require('bluebird');
+import {isFunction} from 'lodash';
 
-function createReduxStore(req, match) { // eslint-disable-line
-  const initialState = {
-    checkBox: {checked: false},
-    number: {value: 999},
-    staticData: 'Some non-async data here'
-  };
-
+const createStorePromise = (initialState = {}) => {
   const store = createStore(rootReducer, initialState, applyMiddleware(thunkMiddleware));
   return Promise.resolve(store);
+};
+
+const noopAction = () => () => {
+  return Promise.resolve(true);
+};
+
+function createReduxStore(req, match) { // eslint-disable-line
+  const route = match.renderProps.routes[0];
+  const params = match.renderProps.params;
+
+  let initialState = route.initialState;
+  let initialStateLoader = noopAction;
+
+  if (isFunction(initialState)) {
+    initialStateLoader = initialState;
+    initialState = {};
+  }
+
+  const storePromise = createStorePromise(initialState);
+
+  return storePromise
+    .then(store =>
+      store.dispatch(initialStateLoader(params))
+      .then(() => store)
+    );
 }
 
 //

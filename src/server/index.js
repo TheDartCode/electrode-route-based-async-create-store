@@ -9,6 +9,7 @@ process.on('SIGINT', () => {
 const electrodeConfippet = require('electrode-confippet');
 const staticPathsDecor = require('electrode-static-paths');
 const support = require('electrode-archetype-react-app/support');
+const setServer = require('electrode-hybrid-fetch').setServer;
 
 require.extensions['.css'] = () => {
   return;
@@ -34,5 +35,6 @@ support.load()
     SSRCaching.enableCaching();
     SSRCaching.setCachingConfig(cacheConfig);
 
-    require("electrode-server")(config, [staticPathsDecor()]);  // eslint-disable-line
+    require("electrode-server")(config, [staticPathsDecor()])  // eslint-disable-line
+      .then(server => setServer(server));
   });

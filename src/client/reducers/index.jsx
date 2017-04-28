@@ -29,7 +29,7 @@ const asyncData = (store, action) => {
     case 'REQUEST_DATA':
       return {data: '<requesting>', option: action.data};
     case 'RECEIVE_DATA':
-      return action.data;
+      return {data: action.data, option: store.option};
     default:
       return store || {data: '', option: ''};
   }

@@ -8,10 +8,13 @@ import {routes} from './routes';
 import {Router, browserHistory} from 'react-router';
 import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
-import thunkMiddleware from 'redux-thunk';
+import thunk from 'redux-thunk';
+import {fetch} from 'electrode-hybrid-fetch';
+
 /*  */
 import './styles/base.css';
 import rootReducer from './reducers';
+const thunkMiddleware = thunk.withExtraArgument(fetch);
 
 // Add the client app start up code to a function as window.webappStart.
 // The webapp's full HTML will check and call it once the js-content

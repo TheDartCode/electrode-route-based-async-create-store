@@ -6,10 +6,13 @@ import ReduxRouterEngine from 'electrode-redux-router-engine';
 import {routes} from '../../client/routes';
 import {createStore, applyMiddleware} from 'redux';
 import rootReducer from '../../client/reducers';
-import thunkMiddleware from 'redux-thunk';
+import thunk from 'redux-thunk';
+import {ssrFetch} from 'electrode-hybrid-fetch';
 
 const Promise = require('bluebird');
 import {isFunction} from 'lodash';
+
+const thunkMiddleware = thunk.withExtraArgument(ssrFetch);
 
 const createStorePromise = (initialState = {}) => {
   const store = createStore(rootReducer, initialState, applyMiddleware(thunkMiddleware));

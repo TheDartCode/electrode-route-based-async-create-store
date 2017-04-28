@@ -1,6 +1,3 @@
-import {delay} from 'lodash';
-import fetch from 'isomorphic-fetch';
-
 export const toggleCheck = () => {
   return {
     type: 'TOGGLE_CHECK'
@@ -33,17 +30,13 @@ const requestData = (option) => {
   };
 };
 
-const fetchData = () => {
-  return fetch('/custom-data');
-};
-
 export const getData = (params) => {
-  return (dispatch) => {
+  return (dispatch, getState, fetch) => {
     dispatch(requestData(params.option));
-    return fetchData()
-      .then(respBody => respBody.json())
+    return fetch('/custom-data')
+      .then((data) => data.json)
       .then((data) => {
-        dispatch(receiveData({data, option: params.option}));
+        dispatch(receiveData(data));
       });
   };
 };
